@@ -14,7 +14,11 @@ const handler = NextAuth({
     })
   ],
   async session({ session }) {},
-  async signIn({ profile }) {}
+  async signIn({ profile }) {
+    try {
+      // serverless -> Lambda -> dynamodb
+    } catch (error) {}
+  }
 });
 
 export { handler as GET, handler as POST };
