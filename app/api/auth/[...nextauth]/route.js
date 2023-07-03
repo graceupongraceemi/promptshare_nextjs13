@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import User from '@models/user';
 import { connectToDB } from '@utils/database';
 
 // console.log({
@@ -23,7 +24,12 @@ const handler = NextAuth({
       // check if a user already exits
 
       // it not, create a new user
-    } catch (error) {}
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 });
 
