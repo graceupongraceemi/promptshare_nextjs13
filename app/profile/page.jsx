@@ -1,21 +1,38 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
-import { useSession } from 'next-aut/react'
-import { useRouter } from 'next/navigation'
+import { useSession } from 'next-aut/react';
+import { useRouter } from 'next/navigation';
 
-import Profile from '@components/profile'
+import Profile from '@components/profile';
 
-const Profile = () => {
+const MyProfile = () => {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      const data = await response.json();
+
+      setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
+  const handleEdit = () => {};
+
+  const handleDelete = async () => {};
+
   return (
-    <Profile 
+    <Profile
       name='My'
       desc='Welcome to your personalized profile page'
       data={[]}
-      handleEdit={}
-      handleDelete={}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
     />
-  )
+  );
 };
 
-export default Profile;
+export default MyProfile;
